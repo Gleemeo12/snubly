@@ -1,6 +1,7 @@
 (function () {
     var formSelector = 'input[type="email"]'; // Select email input field
     var submitButtonSelector = 'button[type="submit"]'; // Select submit button
+    var feedbackSelector = '.email-feedback'; // Placeholder for visual feedback (green checkmark or red error)
 
     // Retrieve API config from the script embedded in the HTML page
     var api_url = window.emailValidation.api_url; // Bubble API endpoint
@@ -22,15 +23,23 @@
         }
     }
 
-    // Display validation result (valid or invalid) visually
+    // Display validation result (valid or invalid) with visual feedback
     function showValidationResult(isValid) {
         var emailField = document.querySelector(formSelector);
+        var feedbackElement = document.querySelector(feedbackSelector);
+
         if (isValid) {
             emailField.classList.add("valid-email");
             emailField.classList.remove("invalid-email");
+
+            // Show green checkmark
+            feedbackElement.innerHTML = '<span style="color: green;">&#10004; Valid email</span>';
         } else {
             emailField.classList.add("invalid-email");
             emailField.classList.remove("valid-email");
+
+            // Show red error
+            feedbackElement.innerHTML = '<span style="color: red;">&#10006; Invalid email</span>';
         }
     }
 
@@ -64,7 +73,7 @@
     }
 
     // Listen for input changes in the email field
-    document.addEventListener("input", function (event) {
+    document.addEventListener("input", function () {
         var emailField = document.querySelector(formSelector);
         if (emailField && emailField.value) {
             var email = emailField.value;
@@ -80,4 +89,5 @@
 
     disableSubmitButton(); // Initially disable submit button until validation is done
 })();
+
 
