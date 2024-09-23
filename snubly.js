@@ -3,7 +3,7 @@
     var submitButtonSelector = 'button[type="submit"]';
 
     // Use the configuration from the embedded script
-    var bubbleApiUrl = window.emailValidation.api_url;
+    var api_url = window.emailValidation.api_url;
     var appToken = window.emailValidation.app_token;
 
     function disableSubmitButton() {
@@ -33,7 +33,7 @@
 
     function validateEmail(email) {
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", bubbleApiUrl, true);
+        xhr.open("POST", api_url, true);
         xhr.setRequestHeader("Content-Type", "application/json");
 
         xhr.onreadystatechange = function () {
